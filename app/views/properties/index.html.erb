@@ -1,0 +1,141 @@
+<section id="properties-index" class="container-fluid">
+	<div class="row">
+		<div class="col-10 mx-auto">
+			<h1>Tus propiedas</h1>
+			<p>Lista de propiedas que has evaluado</p>
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary my-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+				Agregar propiedad
+			</button>
+
+			<!-- Modal -->
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">Propiedad Nueva</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<%= form_for :property, url: property_create_path do |f| %>
+							<div class="form-group">
+								<%= f.label "Nombre de la propiedad" %><br/>
+								<%= f.text_field :name, class: "form-control", required: true %>
+							</div>
+							<div class="form-group">
+								<%= f.label "Dirección" %><br/>
+								<%= f.text_field :address, class: "form-control", required: true %>
+							</div>
+							<div class="form-group">
+								<%= f.label "Calificación que le das" %><br/>
+								<%= f.select :rating, (1..5).to_a %>
+							</div>
+							<div class="form-group">
+								<%= f.label "¿Por qué le das esta Calificación?" %><br/>
+								<%= f.text_field :description, class: "form-control", required: true %>
+							</div>
+							<div class="form-group">
+								<%= f.label "Url de la imagen" %><br/>
+								<%= f.text_field :image, class: "form-control", required: true %>
+							</div>
+							
+							<div class="form-group">
+								<%= f.submit "Agregar Propiedad", class: "btn btn-primary mt-3" %>
+							</div>
+
+							<% end %>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container-fluid mt-5">
+				<div class="row">
+					<% unless current_user.properties.nil? %>
+					<% current_user.properties.each do | property| %>
+					<div class="col-12 col-sm-6 col-md-4 col-xl-3">
+						<div class="card">
+							<img src="<%= property.image %>" class="card-img-top" alt="">
+							<div class="card-body">
+								<h5><%= property.name %></h5>
+								<p class="card-text"><p><%= property.description %></p>
+								<p class="card-text"><p><%= property.address %></p>
+								<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star checked"></span>
+								<span class="fa fa-star"></span>
+								<span class="fa fa-star"></span>
+								<p class="card-text">Tú calificación: <%= property.rating %></p>
+								<!-- Button trigger modal -->
+								<button type="button" class="btn btn-primary my-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+									<i class="bi bi-pencil-fill"></i> Editar Propiedad
+								</button>
+
+								<!-- Modal -->
+								<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+									<div class="modal-dialog">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="staticBackdropLabel">Editar propiedad</h5>
+												<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											</div>
+											<div class="modal-body">
+												<%= form_for :property, url: property_update_path(property.id) do |f| %>
+												<div class="form-group">
+													<%= f.label "Nombre de la propiedad" %><br/>
+													<%= f.text_field :name, class: "form-control", required: true, value: property.name %>
+												</div>
+												<div class="form-group">
+													<%= f.label "Dirección" %><br/>
+													<%= f.text_field :address, class: "form-control", required: true, value: property.address %>
+												</div>
+												<div class="form-group">
+													<%= f.label "Calificación que le das" %><br/>
+													<%= f.select :rating, (1..5).to_a, value: property.rating %>
+												</div>
+												<div class="form-group">
+													<%= f.label "¿Por qué le das esta Calificación?" %><br/>
+													<%= f.text_field :description, class: "form-control", required: true, value: property.description %>
+												</div>
+												<div class="form-group">
+													<%= f.label "Url de la imagen" %><br/>
+													<%= f.text_field :image, class: "form-control", required: true, value: property.image %>
+												</div>
+
+												<div class="form-group">
+													<%= f.submit "Editar Propiedad", class: "btn btn-primary mt-3" %>
+												</div>
+
+												<% end %>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+											</div>
+										</div>
+									</div>
+								</div> 
+								<%= link_to property_show_path(property.id) do %>
+								<div class="btn btn-secondary">
+									<i class="bi bi-eye"></i> Ver propiedad
+								</div>
+								<% end %>
+								<%= button_to 'Borrar Propiedad', property_destroy_path(property.id), form: { data: { turbo_confirm: "Estas seguro?" } }, method: :delete, class: "btn btn-danger my-1" %>
+
+							</div>
+						</div>
+					</div>
+					<% end %>
+					<% else %>
+					<div class="col-12">
+						<p class="text-center">Aún no hay propiedades agregadas</p>
+					</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
