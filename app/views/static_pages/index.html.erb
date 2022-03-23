@@ -2,6 +2,9 @@
   <div class="row">
     <div class="col-10 mx-auto py-5">
       <h1 class="text-center">TBD (TO BE DEFINE)</h1>
+      <%if current_user%>
+      <h4>Hola <%= current_user.username%></h4>
+      <%end%>
       <p> Página del hermano de slobo</p>
       <p>Agregar el carousel del home</p>
       <p>Agregar el devide para iniciar sesión</p>
