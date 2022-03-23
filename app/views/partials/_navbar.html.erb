@@ -1,6 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light"style="background-color: rgba(23, 26, 29, 0.8);">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">TBD</a>
+    <%= link_to root_path, class:"navbar-brand" do %>
+      <%= image_tag "casa_color.png", class: "logo-nav" %>
+     <% end %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,44 +12,29 @@
           <a class="nav-link active" aria-current="page" href="#">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+          <a class="nav-link" href="#">Propiedades</a>
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
     </div>
   </div>
   <div class="w-50 d-flex justify-content-end">
     <% if current_user %>
     <div class="nav-item">
-    <%= link_to current_user.name , edit_user_registration_path, class:"nav-link" %>
+    <%= link_to edit_user_registration_path, class:"navbar-brand d-flex" do %>
+      <i class="bi bi-person me-2"></i>
+      <p><%=current_user.name%></p>
+     <% end %>
      
     </div>
     <div class="nav-item">
-      <%= button_to "Sign out", destroy_user_session_path, method: :delete %>
+      <%= button_to "Sign out", destroy_user_session_path, method: :delete , class:"btn btn-danger me-2"%>
     </div>
     <%else%>
     <div class="nav-item">
-      <%= link_to "Sign Up", new_user_registration_path, class:"nav-link" %>
+      <%= link_to "Sign Up", new_user_registration_path, class:"nav-link btn btn-success me-2" %>
     </div>
-    <div class="nav-item">
-      <%= link_to "Login", new_user_session_path, class:'nav-link'%>
+    <div class="nav-item me-2">
+      <%= link_to "Login", new_user_session_path, class:'nav-link btn btn-info'%>
     </div>
     <%end%>
   </div>
