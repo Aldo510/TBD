@@ -6,28 +6,24 @@
     <div class="carousel-inner" role="listbox">
 
       <!-- Slide 1 -->
-      <div class="carousel-item active" id="item1">
-        <div class="carousel-container">
-          <div class="container w-50">
-            <h2 class="animated fadeInDown">¿Intersado en una propiedad?</h2>
-            <p class="animated fadeInUp">Mira sus reseñas</p>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Direccion" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+      <%@properties.each_with_index do |property, index| %>
+        <%if index==0%>
+        <div class="carousel-item active" id="item<%=index+1%>" style="background-image:url('<%=property.image%>')">
+          <%else%>
+          <div class="carousel-item" id="item<%=index+1%>" style="background-image:url('<%=property.image%>')">
+        <%end%>
+          <div class="carousel-container">
+            <div class="container w-50">
+              <h2 class="animated fadeInDown">¿Intersado en una propiedad?</h2>
+              <p class="animated fadeInUp">Mira sus reseñas</p>
+              <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Direccion" aria-label="Search">
+                <button class="btn btn-success" type="submit">Search</button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-
-      <!-- Slide 2 -->
-      <div class="carousel-item" id="item2">
-        <div class="carousel-container">
-          <div class="container">
-            <h2 class="animated fadeInDown">Califica las propiedades</h2>
-            <a href="#about" class="btn-get-started animated fadeInUp scrollto">Ver propiedades</a>
-          </div>
-        </div>
-      </div>
+      <%end%>
 
     </div>
 
