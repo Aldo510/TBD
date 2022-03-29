@@ -6,28 +6,24 @@
     <div class="carousel-inner" role="listbox">
 
       <!-- Slide 1 -->
-      <div class="carousel-item active" id="item1">
-        <div class="carousel-container">
-          <div class="container w-50">
-            <h2 class="animated fadeInDown">¿Intersado en una propiedad?</h2>
-            <p class="animated fadeInUp">Mira sus reseñas</p>
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Direccion" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit">Search</button>
-            </form>
+      <%@properties.each_with_index do |property, index| %>
+        <%if index==0%>
+        <div class="carousel-item active" id="item<%=index+1%>" style="background-image:url('<%=property.image%>')">
+          <%else%>
+          <div class="carousel-item" id="item<%=index+1%>" style="background-image:url('<%=property.image%>')">
+        <%end%>
+          <div class="carousel-container">
+            <div class="container w-50">
+              <h2 class="animated fadeInDown">¿Intersado en una propiedad?</h2>
+              <p class="animated fadeInUp">Mira sus reseñas</p>
+              <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Direccion" aria-label="Search">
+                <button class="btn btn-success" type="submit">Search</button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
-
-      <!-- Slide 2 -->
-      <div class="carousel-item" id="item2">
-        <div class="carousel-container">
-          <div class="container">
-            <h2 class="animated fadeInDown">Califica las propiedades</h2>
-            <a href="#about" class="btn-get-started animated fadeInUp scrollto">Ver propiedades</a>
-          </div>
-        </div>
-      </div>
+      <%end%>
 
     </div>
 
@@ -43,14 +39,39 @@
 <section id="home" class="container-fluid">
   <div class="row">
     <div class="col-10 mx-auto py-5">
-      <h1 class="text-center">TBD (TO BE DEFINE)</h1>
+      <h1 class="text-center">Propiedades</h1>
       <%if current_user%>
       <h4>Hola <%= current_user.username%></h4>
       <%end%>
-      <p> Página del hermano de slobo</p>
-      <p>Agregar el carousel del home</p>
-      <p>Agregar el devide para iniciar sesión</p>
-      <p>Agregar el modelo: Usuario, Propiedad, comentario</p>
+      <div class="container-fluid">
+        <div class="row">
+          <%@properties.each do |property|%>
+          <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+            <div class="card">
+              <img src="<%= property.image %>" class="card-img-top" alt="">
+              <div class="card-body">
+                <h5><%= property.name %></h5>
+                <p class="card-text"><p><%= property.description %></p>
+                <p class="card-text"><p><%= property.address %></p>
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+                <p class="card-text">Calificación: <%= property.rating %></p>
+                <%= link_to property_show_path(property.id) do %>
+                <div class="btn btn-secondary">
+                  <i class="bi bi-eye"></i> Ver propiedad
+                </div>
+                <% end %>      
+              </div>
+            </div>
+          </div>
+          <%end%>
+        </div>
+      </div>
     </div>
   </div>
 </section>

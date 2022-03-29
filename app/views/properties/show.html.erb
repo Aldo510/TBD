@@ -14,7 +14,37 @@
 			<h3 class="text-center">
 				Lista de comentarios
 			</h3>
-			<p>Aún no hay comentarios</p>
+			<%unless @property.comments.nil?%>
+				<% @property.comments.each do |comment|%>
+					<div class="rounded shadow radius p-2 m-1">
+						<h4><%= User.find(comment.user_id).username %></h4>
+						<p><%=comment.content%></p>
+						<%comment.rating.times do |t|%>
+							<i class="bi bi-star-fill yellow-300"></i>
+						<%end%>
+						<%if comment.user_id == current_user.id%>
+							<%= button_to 'Borrar comentario', comment_destroy_path(comment.id), form: { data: { turbo_confirm: "Estas seguro?" } }, method: :delete, class: "btn btn-danger my-1" %>
+						<%end%>
+					</div>
+				<%end%>
+			<%end%>
+			<div class="rounded shadow radius p-2">
+				<%=form_for :comment, url:comment_create_path do |f| %>
+					<div class="form-group">
+						<%= f.text_field :content, placeholder: "Agrega tu comentario", class: "form-control my-2" %>
+				    </div>
+				  	<div class="form-group my-3">
+						  <%=f.label "Calificación"%>
+						<%= f.select :rating, (1..5).to_a , class: "form-control" %>
+			  		</div>
+					  <div class="form-group d-none">
+						<%= f.text_field :property_id , class: "form-control" , value:@property.id%>
+			  		  </div>
+					  <div class="form-group">
+						<%= f.submit "Comentar", class:"btn btn-primary"%>
+			  		</div>
+				<%end%>
+			</div>
 		</div>
 	</div>
 </section>
