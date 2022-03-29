@@ -13,7 +13,7 @@ class CommentsController < ApplicationController
                 redirect_to property_show_path(@comment.property_id)
             end 
         else
-            flash[:notice]="Debes iniciar sesión para comentar"
+            flash[:notice]="Debes iniciar sesión para comentar" 
             redirect_to new_user_session_path
         end
     end
