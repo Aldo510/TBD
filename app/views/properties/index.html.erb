@@ -4,8 +4,8 @@
 			<h1>Tus propiedades</h1>
 			<p>Lista de propiedas que has evaluado</p>
 			<!-- Button trigger modal -->
-			<button type="button" class="btn btn-primary my-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
-				Agregar propiedad
+			<button type="button" class="btn btn-blue my-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+				<i class="bi bi-plus-circle"></i> Agregar propiedad
 			</button>
 
 			<!-- Modal -->
@@ -38,7 +38,7 @@
 								<%= f.label "Url de la imagen" %><br/>
 								<%= f.text_field :image, class: "form-control", required: true %>
 							</div>
-							
+
 							<div class="form-group">
 								<%= f.submit "Agregar Propiedad", class: "btn btn-primary mt-3" %>
 							</div>
@@ -71,7 +71,7 @@
 								<span class="fa fa-star"></span>
 								<p class="card-text">Tú calificación: <%= property.rating %></p>
 								<!-- Button trigger modal -->
-								<button type="button" class="btn btn-primary my-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+								<button type="button" class="btn btn-blue my-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 									<i class="bi bi-pencil-fill"></i> Editar Propiedad
 								</button>
 
@@ -117,13 +117,15 @@
 											</div>
 										</div>
 									</div>
-								</div> 
+								</div>
 								<%= link_to property_show_path(property.id) do %>
 								<div class="btn btn-secondary">
 									<i class="bi bi-eye"></i> Ver propiedad
 								</div>
 								<% end %>
-								<%= button_to 'Borrar Propiedad', property_destroy_path(property.id), form: { data: { turbo_confirm: "Estas seguro?" } }, method: :delete, class: "btn btn-danger my-1" %>
+								<%= button_to property_destroy_path(property.id), form: { data: { turbo_confirm: "Estas seguro?" } }, method: :delete, class: "btn btn-danger my-1" do %>
+								<i class="bi bi-trash"></i> Borrar propiedad
+								<% end %>
 
 							</div>
 						</div>

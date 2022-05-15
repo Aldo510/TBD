@@ -6,7 +6,8 @@
     <div class="carousel-inner" role="listbox">
 
       <!-- Slide 1 -->
-      <%@properties.each_with_index do |property, index| %>
+      <% if @properties %>
+      <% @properties.each_with_index do |property, index| %>
         <%if index==0%>
         <div class="carousel-item active" id="item<%=index+1%>" style="background-image:url('<%=property.image%>')">
           <%else%>
@@ -14,16 +15,17 @@
         <%end%>
           <div class="carousel-container">
             <div class="container w-50">
-              <h2 class="animated fadeInDown">¿Intersado en una propiedad?</h2>
+              <h2 class="animated fadeInDown">¿Interesado en una propiedad?</h2>
               <p class="animated fadeInUp">Mira sus reseñas</p>
               <form class="d-flex">
                 <input class="form-control me-2" type="search" placeholder="Direccion" aria-label="Search">
-                <button class="btn btn-success" type="submit">Search</button>
+                <button class="btn btn-blue" type="submit">Search</button>
               </form>
             </div>
           </div>
         </div>
-      <%end%>
+      <% end %>
+      <% end %>
 
     </div>
 
@@ -42,9 +44,11 @@
       <h1 class="text-center">Propiedades</h1>
       <%if current_user%>
       <h4>Hola <%= current_user.username%></h4>
+      <%= link_to "Agregar propiedad", properties_index_path, class: "btn btn-blue my-2" %>
       <%end%>
       <div class="container-fluid">
         <div class="row">
+          <% if @properties %>
           <%@properties.each do |property|%>
           <div class="col-12 col-sm-6 col-md-4 col-xl-3">
             <div class="card">
@@ -54,7 +58,7 @@
                 <p class="card-text"><p><%= property.description %></p>
                 <p class="card-text"><p><%= property.address %></p>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-      
+
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
                 <span class="fa fa-star checked"></span>
@@ -65,11 +69,12 @@
                 <div class="btn btn-secondary">
                   <i class="bi bi-eye"></i> Ver propiedad
                 </div>
-                <% end %>      
+                <% end %>
               </div>
             </div>
           </div>
-          <%end%>
+          <% end %>
+          <% end %>
         </div>
       </div>
     </div>
