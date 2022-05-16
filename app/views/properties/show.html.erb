@@ -11,6 +11,7 @@
 	<div class="row">
 		<div class="col-10 mx-auto">
 			<%= link_to "Regresar a las propiedades", properties_index_path, class: "btn btn-primary" %>
+			<h5>Dueño: <%= link_to Owner.find(@property.owner_id).name, owner_show_path(@property.owner_id) %></h5>
 			<h3 class="text-center">
 				Lista de comentarios
 			</h3>
@@ -28,6 +29,7 @@
 					</div>
 				<%end%>
 			<%end%>
+
 			<div class="rounded shadow radius p-2">
 				<%=form_for :comment, url:comment_create_path do |f| %>
 					<div class="form-group">

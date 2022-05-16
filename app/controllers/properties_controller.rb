@@ -14,10 +14,12 @@ class PropertiesController < ApplicationController
   end
 
   def create
+    @owner = Owner.create(name: " ")
     @property= current_user.properties.build(property_params)
+    @property.owner_id = @owner.id
     if @property.save
       flash[:success] = "Se creó la propiedad correctamente"
-      redirect_to properties_index_path
+      redirect_to owner_edit_path(@property.owner_id)
     else
       flash[:danger] = "hubó un error al crear la propiedad"
       redirect_to properties_index_path

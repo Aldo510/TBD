@@ -1,0 +1,26 @@
+<h5>Dueño de la propiedad</h5>
+<div class="form-owner">
+    <%= form_for :owner, url: owner_update_path(@owner.id) do |f| %>
+    <div class="form-group">
+        <%= f.label "Nombre del propietario" %><br/>
+        <%= f.text_field :name, class: "form-control", required: true %>
+    </div>
+    <div class="form-group">
+        <%= f.label "Atención" %><br/>
+        <%= f.select :atention, (1..5).to_a %>
+    </div>
+    <div class="form-group">
+        <%= f.label "Respuesta" %><br/>
+        <%= f.select :respuesta, (1..5).to_a %>
+    </div>
+    <div class="form-group">
+        <%= f.label "Amabilidad" %><br/>
+        <%= f.select :amabilidad, (1..5).to_a %>
+    </div>
+    
+    <div class="form-group">
+        <%= f.submit "Agregar Propiedad", class: "btn btn-primary mt-3" %>
+    </div>
+    
+    <% end %>
+</div>

@@ -6,7 +6,7 @@
 			<!-- Button trigger modal -->
 			<button type="button" class="btn btn-blue my-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
 				<i class="bi bi-plus-circle"></i> Agregar propiedad
-			</button>
+			</button> 
 
 			<!-- Modal -->
 			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -70,6 +70,8 @@
 								<span class="fa fa-star"></span>
 								<span class="fa fa-star"></span>
 								<p class="card-text">Tú calificación: <%= property.rating %></p>
+								<p>Dueño: <%= link_to Owner.find(property.owner_id).name, owner_show_path(property.owner_id) %></p>
+								<p>Calificación del dueño: <%=((Owner.find(property.owner_id).atention + Owner.find(property.owner_id).respuesta + Owner.find(property.owner_id).amabilidad)/3).round(2)%></p>
 								<!-- Button trigger modal -->
 								<button type="button" class="btn btn-blue my-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
 									<i class="bi bi-pencil-fill"></i> Editar Propiedad

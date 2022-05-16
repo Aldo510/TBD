@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  atention: 1.5
+  respuesta: 1.5
+  amabilidad: 1.5
+
+two:
+  name: MyString
+  atention: 1.5
+  respuesta: 1.5
+  amabilidad: 1.5
