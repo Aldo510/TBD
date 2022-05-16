@@ -1,14 +1,14 @@
-<div class="container">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-10 mx-auto">
-            <div class="rounded shadow radius p-2 m-1">
-                <ul>
-                    <li><p>Nombre: <%= @owner.name%></p></li>
-                    <li>Atención: <p><%= @owner.atention%></p></li>
-                    <li>Respuesta:<p><%= @owner.respuesta%></p></li>
-                    <li>Amabilidad:<p><%= @owner.amabilidad%></p></li>
-                    <li>Calificación: <p><%= @owner_calif%></p></li>
-                </ul>
+        <div class="col-10 col-sm-9 col-md-8 col-lg-7 col-xl-6 mx-auto my-5">
+            <h1 class="text-center display-3">Detalles del dueño</h1>
+            <%= link_to "Ver propiedades", properties_index_path, class: "btn btn-blue mb-3" %>
+            <div class="rounded shadow radius p-3 m-1">                
+                <p>Nombre: <%= @owner.name%></p>
+                <p>Atención: <%= @owner.atention%></p>
+                <p>Respuesta: <%= @owner.respuesta%></p>
+                <p>Amabilidad: <%= @owner.amabilidad%></p>
+                <p>Calificación: <%= @owner_calif%></p>
             </div>
         </div>
     </div>

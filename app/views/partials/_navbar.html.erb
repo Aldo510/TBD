@@ -13,7 +13,7 @@
         </li>
         <li class="nav-item">
           <%if current_user%>
-          <%=link_to "properties", properties_index_path, class:"nav-link"%>
+          <%=link_to "Propiedades", properties_index_path, class:"nav-link"%>
           <%end%>
         </li>
       </ul>
@@ -24,7 +24,7 @@
     <div class="nav-item">
     <%= link_to edit_user_registration_path, class:"navbar-brand d-flex" do %>
       <i class="bi bi-person me-2 text-white"></i>
-      <p class="text-white"><%= current_user.name %></p>
+      <p class="text-white">Hola <%= current_user.username %></p>
      <% end %>
 
     </div>
@@ -33,10 +33,10 @@
     </div>
     <%else%>
     <div class="nav-item">
-      <%= link_to "Sign Up", new_user_registration_path, class:"nav-link btn btn-success me-2" %>
+      <%= link_to "Sign Up", new_user_registration_path, class:"nav-link btn btn-purple me-2" %>
     </div>
     <div class="nav-item me-2">
-      <%= link_to "Login", new_user_session_path, class:'nav-link btn btn-info'%>
+      <%= link_to "Login", new_user_session_path, class:'nav-link btn btn-blue'%>
     </div>
     <%end%>
   </div>

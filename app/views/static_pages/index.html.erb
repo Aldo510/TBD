@@ -57,14 +57,16 @@
                 <h5><%= property.name %></h5>
                 <p class="card-text"><p><%= property.description %></p>
                 <p class="card-text"><p><%= property.address %></p>
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star checked"></span>
-                <span class="fa fa-star"></span>
-                <span class="fa fa-star"></span>
-                <p class="card-text">Calificación: <%= property.rating %></p>
+                <% property.rating.to_i.times do |t| %>
+                  <span class="fa fa-star"></span>
+                <% end %>
+                <p class="card-text">Tú calificación: <%= property.rating %></p>
+                <p class="card-text"><span class="bi bi-shield-shaded"></span> Seguridad: <%= property.security %></p>
+                <p class="card-text"><span class="bi bi-ear"></span> Ruido: <%= property.noise %></p>
+                <p class="card-text"><span class="bi bi-house-heart"></span> Limpieza: <%= property.cleaning %></p>
+                <p>Dueño: <%= link_to Owner.find(property.owner_id).name, owner_show_path(property.owner_id) %></p>
+                <p>Calificación del dueño: <%=((Owner.find(property.owner_id).atention + Owner.find(property.owner_id).respuesta + Owner.find(property.owner_id).amabilidad)/3).round(2)%></p>
                 <%= link_to property_show_path(property.id) do %>
                 <div class="btn btn-secondary">
                   <i class="bi bi-eye"></i> Ver propiedad

@@ -1,58 +1,54 @@
-
-<div class="container-fluid">
+<section id="sign_up" class="container-fluid">
   <div class="row">
-    <div class="col-12 col-sm-5 text-register d-none d-sm-block ">
-      <div class="container vertical-center">
-        <h3>TBD</h3>
-        <ul>
-          <li>Busca propiedades</li>
-          <li> Ve las reseñas</li>
-          <li> Califica propiedades</li>
-        </ul>
-      </div>
+    <div class="col-12 col-sm-5 mx-auto text-center py-5 text-white d-none d-sm-block ">
+        <h3 class="display-5">TBD</h3>
+
+          <p>Busca propiedades</p>
+          <p> Ve las reseñas</p>
+          <p> Califica propiedades</p>
     </div>
-    <div class="col-12 col-sm-7 d-flex justify-content-center">
+    <div class="col-12 col-sm-7 d-flex justify-content-center ">
       <div class="card form-custom mt-5">
         <div class="card-body text-center">
           <div class="card-tittle"><h2 >Crea tu cuenta</h2></div>
-          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name), class: "bg-light py-5") do |f| %>
           <%= render "devise/shared/error_messages", resource: resource %>
           <div class="field">
-          <%= f.label :Nombre %><br />
-          <%= f.text_field :name, autofocus: true, autocomplete: "name", class:"input-custom" %>
+          <%= f.label :Nombre, class: "form-label" %><br />
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", class:"form-control form-control form-input w-100" %>
         </div>
           <div class="field mt-3">
-          <%= f.label :Apellido %><br />
-          <%= f.text_field :last_name, autofocus: true, autocomplete: "Last name", class:"input-custom" %>
+          <%= f.label :Apellido, class: "form-label" %><br />
+          <%= f.text_field :last_name, autofocus: true, autocomplete: "Last name", class:"form-control" %>
           </div>
           <div class="field mt-3">
-          <%= f.label :Nombre_de_usuario %><br />
-          <%= f.text_field :username, autofocus: true, autocomplete: "username", class:"input-custom" %>
+          <%= f.label :Nombre_de_usuario, class: "form-label" %><br />
+          <%= f.text_field :username, autofocus: true, autocomplete: "username", class:"form-control" %>
           </div>
           <div class="field mt-3">
-            <%= f.label :Correo %><br />
-            <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"input-custom" %>
+            <%= f.label :Correo, class: "form-label" %><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"form-control" %>
           </div>
         
           <div class="field mt-3">
-            <%= f.label :Contraseña %>
+            <%= f.label :Contraseña, class: "form-label" %>
             <% if @minimum_password_length %>
             <em>(<%= @minimum_password_length %> caracteres como mínimo)</em>
             <% end %><br />
-            <%= f.password_field :password, autocomplete: "new-password", class:"input-custom" %>
+            <%= f.password_field :password, autocomplete: "new-password", class:"form-control" %>
           </div>
         
           <div class="field mt-3">
-            <%= f.label :Confirmación_de_contraseña %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"input-custom" %>
+            <%= f.label :Confirmación_de_contraseña, class: "form-label" %><br />
+            <%= f.password_field :password_confirmation, autocomplete: "new-password", class:"form-control" %>
           </div>
         
           <div class="actions mt-3">
-            <%= f.submit "Registrarse", class:"btn btn-success" %>
+            <%= f.submit "Registrarse", class:"btn btn-purple" %>
           </div>
         <% end %>
         </div>
       </div>
     </div>
   </div>
-</div>
+</section>

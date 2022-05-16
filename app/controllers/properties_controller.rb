@@ -40,12 +40,12 @@ class PropertiesController < ApplicationController
   end
 
   def update
-    @property= Property.find(params[:id])
+    @property = Property.find(params[:id])
     if @property.update(property_params)
-      flash[:success] = "Se creó la propiedad correctamente"
+      flash[:success] = "Se actuaizo la propiedad correctamente"
       redirect_to properties_index_path
     else
-      flash[:danger] = "hubó un error al crear la propiedad"
+      flash[:danger] = "Hubó un error al editar la propiedad"
       redirect_to properties_index_path
     end
   end
@@ -53,7 +53,7 @@ class PropertiesController < ApplicationController
   private
 
   def property_params
-    params.require(:property).permit(:name, :description, :image, :address, :rating)
+    params.require(:property).permit(:name, :description, :security, :noise, :cleaning, :image, :address, :rating)
   end
 
 end

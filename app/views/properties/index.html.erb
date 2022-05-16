@@ -19,28 +19,40 @@
 						<div class="modal-body">
 							<%= form_for :property, url: property_create_path do |f| %>
 							<div class="form-group">
-								<%= f.label "Nombre de la propiedad" %><br/>
+								<%= f.label "Nombre de la propiedad", class: "form-label" %><br/>
 								<%= f.text_field :name, class: "form-control", required: true %>
 							</div>
 							<div class="form-group">
-								<%= f.label "Dirección" %><br/>
+								<%= f.label "Dirección", class: "form-label" %><br/>
 								<%= f.text_field :address, class: "form-control", required: true %>
 							</div>
 							<div class="form-group">
-								<%= f.label "Calificación que le das" %><br/>
-								<%= f.select :rating, (1..5).to_a %>
+								<%= f.label "Calificación que le das", class: "form-label" %><br/>
+								<%= f.select(:rating, (1..5).to_a, {}, { :class => 'form-select' }) %>
 							</div>
 							<div class="form-group">
-								<%= f.label "¿Por qué le das esta Calificación?" %><br/>
+								<%= f.label "Calificación de seguridad", class: "form-label" %><br/>
+								<%= f.select(:security, (1..5).to_a, {}, { :class => 'form-select' }) %>
+							</div>
+							<div class="form-group">
+								<%= f.label "Calificación de ruido", class: "form-label" %><br/>
+								<%= f.select(:noise, (1..5).to_a, {}, { :class => 'form-select' }) %>
+							</div>
+							<div class="form-group">
+								<%= f.label "Calificación de limpieza", class: "form-label" %><br/>
+								<%= f.select(:cleaning, (1..5).to_a, {}, { :class => 'form-select' }) %>
+							</div>
+							<div class="form-group">
+								<%= f.label "¿Por qué le das esta Calificación?", class: "form-label" %><br/>
 								<%= f.text_field :description, class: "form-control", required: true %>
 							</div>
 							<div class="form-group">
-								<%= f.label "Url de la imagen" %><br/>
+								<%= f.label "Url de la imagen", class: "form-label" %><br/>
 								<%= f.text_field :image, class: "form-control", required: true %>
 							</div>
 
 							<div class="form-group">
-								<%= f.submit "Agregar Propiedad", class: "btn btn-primary mt-3" %>
+								<%= f.submit "Agregar Propiedad", class: "btn btn-blue mt-3" %>
 							</div>
 
 							<% end %>
@@ -64,12 +76,13 @@
 								<p class="card-text"><p><%= property.address %></p>
 								<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star checked"></span>
-								<span class="fa fa-star"></span>
-								<span class="fa fa-star"></span>
+								<% property.rating.to_i.times do |t| %>
+									<span class="fa fa-star"></span>
+								<% end %>
 								<p class="card-text">Tú calificación: <%= property.rating %></p>
+								<p class="card-text"><span class="bi bi-shield-shaded"></span> Seguridad: <%= property.security %></p>
+								<p class="card-text"><span class="bi bi-ear"></span> Ruido: <%= property.noise %></p>
+								<p class="card-text"><span class="bi bi-house-heart"></span> Limpieza: <%= property.cleaning %></p>
 								<p>Dueño: <%= link_to Owner.find(property.owner_id).name, owner_show_path(property.owner_id) %></p>
 								<p>Calificación del dueño: <%=((Owner.find(property.owner_id).atention + Owner.find(property.owner_id).respuesta + Owner.find(property.owner_id).amabilidad)/3).round(2)%></p>
 								<!-- Button trigger modal -->
@@ -97,7 +110,19 @@
 												</div>
 												<div class="form-group">
 													<%= f.label "Calificación que le das" %><br/>
-													<%= f.select :rating, (1..5).to_a, value: property.rating %>
+													<%= f.select(:rating, (1..5).to_a, {}, { :class => 'form-select' }) %>
+												</div>
+												<div class="form-group">
+													<%= f.label "Calificación de seguridad", class: "form-label" %><br/>
+													<%= f.select(:security, (1..5).to_a, {}, { :class => 'form-select' }) %>
+												</div>
+												<div class="form-group">
+													<%= f.label "Calificación de ruido", class: "form-label" %><br/>
+													<%= f.select(:noise, (1..5).to_a, {}, { :class => 'form-select' }) %>
+												</div>
+												<div class="form-group">
+													<%= f.label "Calificación de limpieza", class: "form-label" %><br/>
+													<%= f.select(:cleaning, (1..5).to_a, {}, { :class => 'form-select' }) %>
 												</div>
 												<div class="form-group">
 													<%= f.label "¿Por qué le das esta Calificación?" %><br/>
@@ -109,7 +134,7 @@
 												</div>
 
 												<div class="form-group">
-													<%= f.submit "Editar Propiedad", class: "btn btn-primary mt-3" %>
+													<%= f.submit "Editar Propiedad", class: "btn btn-blue mt-3" %>
 												</div>
 
 												<% end %>
