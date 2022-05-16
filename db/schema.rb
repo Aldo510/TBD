@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_03_23_234737) do
+ActiveRecord::Schema[7.0].define(version: 2022_05_15_232934) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -25,6 +25,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_23_234737) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
+  create_table "owners", force: :cascade do |t|
+    t.string "name"
+    t.float "atention"
+    t.float "respuesta"
+    t.float "amabilidad"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "properties", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "name"
@@ -34,6 +43,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_23_234737) do
     t.float "rating"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "owner_id", null: false
+    t.index ["owner_id"], name: "index_properties_on_owner_id"
     t.index ["user_id"], name: "index_properties_on_user_id"
   end
 
@@ -54,5 +65,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_03_23_234737) do
 
   add_foreign_key "comments", "properties"
   add_foreign_key "comments", "users"
+  add_foreign_key "properties", "owners"
   add_foreign_key "properties", "users"
 end
