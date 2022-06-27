@@ -19,6 +19,12 @@
 						<div class="modal-body">
 							<%= form_for :property, url: property_create_path do |f| %>
 							<div class="form-group">
+								<!-- Quitar el nombre de la propieda y dejar nada más la dirección -->
+								<!-- Que se puedan anexar evidencias -->
+								<!-- Crear el modelo reseñas de los edificios para que los que vieieron ahí puedan agregar evidencias  -->
+								<!-- El modelo reseña solo se podrá publicar si el comprobante de domicilio corresponde con el de la propiedad -->
+								<!-- Agregar el buscador de propiedades -->
+
 								<%= f.label "Nombre de la propiedad", class: "form-label" %><br/>
 								<%= f.text_field :name, class: "form-control", required: true %>
 							</div>
@@ -32,6 +38,7 @@
 							</div>
 							<div class="form-group">
 								<%= f.label "Calificación de seguridad", class: "form-label" %><br/>
+								<!-- Agregar que 1 es el mas bajo y 5 el más alto -->
 								<%= f.select(:security, (1..5).to_a, {}, { :class => 'form-select' }) %>
 							</div>
 							<div class="form-group">

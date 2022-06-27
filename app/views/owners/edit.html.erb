@@ -5,6 +5,7 @@
             <div class="form-owner">
                 <%= form_for :owner, url: owner_update_path(@owner.id), class: "border bg-light shadow my-5 rounded p-5" do |f| %>
                 <div class="form-group">
+                    <!-- Quitar nombre y poner reseña del propietario y agregar una caja de comentarios que cualquiera puede agregar comentarios -->
                     <%= f.label "Nombre del propietario", class: "form-label" %><br/>
                     <%= f.text_field :name, class: "form-control", required: true %>
                 </div>
