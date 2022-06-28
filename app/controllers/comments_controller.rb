@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
 
     private 
     def comments_params
-        params.require(:comment).permit(:property_id, :content, :rating)
+        params.require(:comment).permit(:property_id, :content, :rating, :evidence)
     end 
 
 end
