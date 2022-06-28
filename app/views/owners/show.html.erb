@@ -4,7 +4,7 @@
             <h1 class="text-center display-3">Detalles del dueño</h1>
             <%= link_to "Ver propiedades", properties_index_path, class: "btn btn-blue mb-3" %>
             <div class="rounded shadow radius p-3 m-1">                
-                <p>Nombre: <%= @owner.name%></p>
+                <p class="text-capitalize">Nombre: <%= Faker::Internet.unique.user_name %></p>
                 <p>Atención: <%= @owner.atention%></p>
                 <p>Respuesta: <%= @owner.respuesta%></p>
                 <p>Amabilidad: <%= @owner.amabilidad%></p>

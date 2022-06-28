@@ -9,66 +9,77 @@
 <section id="property-show-comments" class="container-fluid my-3">
 	<!-- Poner el promedio de las calificaciones de rating, security, noise y cleaning y quitar el nombre del dueño -->
 	<div class="row">
-		<div class="col-10 mx-auto">
-			<%= link_to "Regresar a las propiedades", properties_index_path, class: "btn btn-primary" %>
-			<h5>Dueño: <%= link_to Owner.find(@property.owner_id).name, owner_show_path(@property.owner_id) %></h5>
-			<!-- Agregar el resumen de la propiedad, ruido, seguridad, limpieza -->
-			<!-- Poder contactar al que hizo la reseña por mail para dudas -->
+		<div class="col-10 col-sm-9 col-md-8 col-lg-7 col-xl-6 mx-auto">
+			<p class="card-text text-center"><span class="bi bi-shield-shaded"></span> Seguridad: <%= @property.security %></p>
+			<p class="card-text text-center"><span class="bi bi-ear"></span> Ruido: <%= @property.noise %></p>
+			<p class="card-text text-center"><span class="bi bi-house-heart"></span> Limpieza: <%= @property.cleaning %></p>
+			<p class="text-center text-capitalize">Dueño: <%= link_to Faker::Internet.unique.user_name, owner_show_path(@property.owner_id) %></p>
+			<p class="text-center text-capitalize">Calificación del dueño: <%=((Owner.find(@property.owner_id).atention + Owner.find(@property.owner_id).respuesta + Owner.find(@property.owner_id).amabilidad)/3).round(2)%></p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-10 col-sm-9 col-md-8 col-lg-7 col-xl-6 mx-auto">
+			<%= link_to "Regresar a las propiedades", properties_index_path, class: "btn btn-primary w-100 my-4" %>
 			<div class="container-fluid">
 				<div class="row">
+					<% if @evidences %>
 					<% @evidences.each do |e|%>
 					<div class="col-4">
-						<img src="<%=e%>" alt="" class="img-fluid"">
+						<img src="<%=e%>" alt="" class="img-fluid">
 					</div>
 					<%end%>
+					<% end %>
 				</div>
 			</div>
 			<h3 class="text-center">
 				Lista de comentarios
 			</h3>
-			<%unless @property.comments.nil?%>
-				<% @property.comments.each do |comment|%>
-					<div class="rounded shadow radius p-2 m-1">
-						<h4><%= User.find(comment.user_id).username %></h4>
-						<p><%=comment.content%></p>
-						<%comment.rating.times do |t|%>
-							<i class="bi bi-star-fill yellow-300"></i>
-						<%end%>
-						<div class="container">
-							<div class="row">
-								<%comment.evidence.split(",").each do |img|%>
-									<div class="col-3">
-										<img src="<%=img%>" alt="" class="img-fluid">
-									</div>
-								<%end%>
-							</div>
-						</div>
-						<%if comment.user_id == current_user.id%>
-							<%= button_to 'Borrar comentario', comment_destroy_path(comment.id), form: { data: { turbo_confirm: "Estas seguro?" } }, method: :delete, class: "btn btn-danger my-1" %>
-						<%end%>
-					</div>
+			<% unless @property.comments.nil? %>
+			<% @property.comments.each do |comment|%>
+			<div class="rounded shadow radius p-2 m-1">
+				<h4><%= User.find(comment.user_id).username %></h4>
+				<p><%=comment.content%></p>
+				<%comment.rating.times do |t|%>
+				<i class="bi bi-star-fill yellow-300"></i>
 				<%end%>
+				<div class="container">
+					<div class="row">
+						<% if comment.evidence %>
+						<% comment.evidence.split(",").each do |img| %>
+						<div class="col-3">
+							<img src="<%=img%>" alt="" class="img-fluid">
+						</div>
+						<% end %>
+						<% end %>
+					</div>
+				</div>
+				<a href="mailto:<%= User.find(comment.user_id).email %>" class="btn btn-primary w-100 my-3">Mandar mensaje a este inquilino para resolver dudas</a>
+				<%if comment.user_id == current_user.id%>
+				<%= button_to 'Borrar comentario', comment_destroy_path(comment.id), form: { data: { turbo_confirm: "Estas seguro?" } }, method: :delete, class: "btn btn-danger my-3 w-100" %>
+				<%end%>
+			</div>
+			<%end%>
 			<%end%>
 
 			<div class="rounded shadow radius p-2">
 				<%=form_for :comment, url:comment_create_path do |f| %>
-					<div class="form-group">
-						<%= f.text_field :content, placeholder: "Agrega tu comentario", class: "form-control my-2" %>
-				    </div>
-				  	<div class="form-group my-3">
-						  <%=f.label "Calificación"%>
-						<%= f.select :rating, (1..5).to_a , class: "form-control" %>
-			  		</div>
-					<div class="form-group">
-						<%=f.label "Evidencias(Separa cada link por una coma)"%>
-						<%= f.text_field :evidence , class: "form-control"%>
-			  		</div>
-					<div class="form-group d-none">
-						<%= f.text_field :property_id , class: "form-control" , value:@property.id%>
-			  		</div>
-					<div class="form-group mt-3">
-						<%= f.submit "Comentar", class:"btn btn-primary"%>
-			  		</div>
+				<div class="form-group">
+					<%= f.text_field :content, placeholder: "Agrega tu comentario", class: "form-control my-2" %>
+				</div>
+				<div class="form-group my-3">
+					<%=f.label "Calificación"%>
+					<%= f.select :rating, (1..5).to_a , class: "form-control" %>
+				</div>
+				<div class="form-group">
+					<%=f.label "Evidencias(Separa cada link por una coma)"%>
+					<%= f.text_field :evidence , class: "form-control"%>
+				</div>
+				<div class="form-group d-none">
+					<%= f.text_field :property_id , class: "form-control" , value:@property.id%>
+				</div>
+				<div class="form-group mt-3">
+					<%= f.submit "Comentar", class:"btn btn-primary"%>
+				</div>
 				<%end%>
 			</div>
 		</div>

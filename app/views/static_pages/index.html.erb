@@ -68,7 +68,7 @@
                 <p class="card-text"><span class="bi bi-shield-shaded"></span> Seguridad: <%= property.security %></p>
                 <p class="card-text"><span class="bi bi-ear"></span> Ruido: <%= property.noise %></p>
                 <p class="card-text"><span class="bi bi-house-heart"></span> Limpieza: <%= property.cleaning %></p>
-                <p>Dueño: <%= link_to Owner.find(property.owner_id).name, owner_show_path(property.owner_id) %></p>
+                <p class="text-capitalize">Dueño: <%= link_to Faker::Internet.unique.user_name, owner_show_path(property.owner_id) %></p>
                 <p>Calificación del dueño: <%=((Owner.find(property.owner_id).atention + Owner.find(property.owner_id).respuesta + Owner.find(property.owner_id).amabilidad)/3).round(2)%></p>
                 <%= link_to property_show_path(property.id) do %>
                 <div class="btn btn-secondary">

@@ -8,7 +8,9 @@ class PropertiesController < ApplicationController
   def show
     @property = Property.find(params[:id])
     @evidences = []    
-    @evidences = @property.evidence.split(',')
+    if @property.evidence
+      @evidences = @property.evidence.split(',')
+    end
   end
 
   def new
