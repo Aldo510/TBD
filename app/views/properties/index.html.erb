@@ -27,6 +27,7 @@
 								<%= f.text_field :address, class: "form-control", required: true %>
 								
 							</div>
+							
 							<div class="form-group">
 								<%= f.label "Calificación que le das" %><br/>
 								<%= f.select :rating, (1..5).to_a %>
@@ -39,8 +40,11 @@
 								<%= f.label "Url de la imagen" %><br/>
 								<%= f.text_field :image, class: "form-control", required: true %>
 							</div>
-
 							<div class="form-group">
+								<%= f.label "Evidencias" %><br/>
+								<%= f.text_area :evidence, class: "form-control", required: true %>
+							</div>
+							<div class="form-group">								
 								<%= f.submit "Agregar Propiedad", class: "btn btn-primary mt-3" %>
 							</div>
 
@@ -89,10 +93,6 @@
 											<div class="modal-body">
 												<%= form_for :property, url: property_update_path(property.id) do |f| %>
 												<div class="form-group">
-													<%= f.label "Nombre de la propiedad" %><br/>
-													<%= f.text_field :name, class: "form-control", required: true, value: property.name %>
-												</div>
-												<div class="form-group">
 													<%= f.label "Dirección" %><br/>
 													<%= f.text_field :address, class: "form-control", required: true, value: property.address %>
 												</div>
@@ -108,7 +108,10 @@
 													<%= f.label "Url de la imagen" %><br/>
 													<%= f.text_field :image, class: "form-control", required: true, value: property.image %>
 												</div>
-
+												<div class="form-group">
+													<%= f.label "Evidencias (separa cada link por una ,)" %><br/>
+													<%= f.text_area :evidence, class: "form-control", required: true, value: property.evidence %>
+												</div>
 												<div class="form-group">
 													<%= f.submit "Editar Propiedad", class: "btn btn-primary mt-3" %>
 												</div>

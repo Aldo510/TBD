@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_05_16_193035) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_27_234142) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -47,6 +47,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_16_193035) do
     t.integer "security", default: 0
     t.integer "noise", default: 0
     t.integer "cleaning", default: 0
+    t.string "evidence"
     t.index ["owner_id"], name: "index_properties_on_owner_id"
     t.index ["user_id"], name: "index_properties_on_user_id"
   end

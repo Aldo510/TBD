@@ -7,6 +7,8 @@ class PropertiesController < ApplicationController
 
   def show
     @property = Property.find(params[:id])
+    @evidences = []    
+    @evidences = @property.evidence.split(',')
   end
 
   def new
@@ -53,7 +55,7 @@ class PropertiesController < ApplicationController
   private
 
   def property_params
-    params.require(:property).permit(:name, :description, :security, :noise, :cleaning, :image, :address, :rating)
+    params.require(:property).permit(:name, :description, :security, :noise, :cleaning, :image, :address, :rating, :evidence)
   end
 
 end
