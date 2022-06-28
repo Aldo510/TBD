@@ -18,10 +18,7 @@
 						</div>
 						<div class="modal-body">
 							<%= form_for :property, url: property_create_path do |f| %>
-								<!-- Que se puedan anexar evidencias -->
-								<!-- Crear el modelo reseñas de los edificios para que los que vieieron ahí puedan agregar evidencias  -->
 								<!-- El modelo reseña solo se podrá publicar si el comprobante de domicilio corresponde con el de la propiedad -->
-								<!-- Agregar el buscador de propiedades -->
 							<div class="form-group">
 								<%= f.label "Dirección" %><br/>
 								<%= f.text_field :address, class: "form-control", required: true %>
