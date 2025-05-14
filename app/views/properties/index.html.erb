@@ -1,7 +1,7 @@
 <section id="properties-index" class="container-fluid">
 	<div class="row">
 		<div class="col-10 mx-auto">
-			<h1>Tus propiedades</h1>
+			<h1>Tus reseñas</h1>
 			<p>Lista de propiedas que has evaluado</p>
 			<!-- Button trigger modal -->
 			<button type="button" class="btn btn-blue my-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -19,6 +19,8 @@
 						<div class="modal-body">
 							<%= form_for :property, url: property_create_path do |f| %>
 								<!-- El modelo reseña solo se podrá publicar si el comprobante de domicilio corresponde con el de la propiedad -->
+								<!-- Agregar los datos completos de la propiedad: Estado, municipio, colonia, Código postal -->
+								<!-- Agregar el filtro de las busquedas por nombre y por colonia -->
 							<div class="form-group">
 								<%= f.label "Dirección" %><br/>
 								<%= f.text_field :address, class: "form-control", required: true %>

@@ -39,8 +39,15 @@ $dark-blue: #2A2D8E;
   width: 50% !important;
 }
 .navbar{
-  a{color: white;}
-  .nav-link {color: white !important;}
+  a{
+    color: white;
+  }
+  .nav-link {
+    color: white !important;
+  }
+  .logo-navbar{
+    max-width: 50px;
+  }
 }
 .text-register{
   position: relative;

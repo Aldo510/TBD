@@ -1,7 +1,7 @@
 <section id="property-show" class="container-fluid" style="background-image: url('<%= @property.image %>');">
 	<div class="row h-100 align-items-center">
 		<div class="col-10 col-sm-9 col-md-8 col-lg-7 col-xl-6 text-center text-white mx-auto">
-			<h3> <%= @property.description %> </h3>
+			<h3> <%#= @property.description %> Calificación general</h3>
 			<p> <%= @property.rating %> </p>
 		</div>
 	</div>
@@ -63,6 +63,10 @@
 
 			<div class="rounded shadow radius p-2">
 				<%=form_for :comment, url:comment_create_path do |f| %>
+				<div class="form-group">
+					<h2 class="text-center">Si has vivido aquí, agrega tu reseña (Los comentarios serán verificados con las evidencias)</h2>
+					<!-- Agregar un campo que sea comprobante de domicilio o INE para verificar que si vivió ahí y el comentario sea valido y que solo los administradores puedan verla -->
+				</div>
 				<div class="form-group">
 					<%= f.text_field :content, placeholder: "Agrega tu comentario", class: "form-control my-2" %>
 				</div>
